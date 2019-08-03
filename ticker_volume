@@ -7,7 +7,7 @@ Sub total_volume()
     Dim trade_volume as Double
     trade_volume = 0
 
-'-- ? CHECK ? -- Keep track of the location for each ticker in the table 
+'Keep track of the location for each ticker in the table 
         'From credit_card_challenge example line 10
     Dim Ticker_Table_Row As Integer
     
