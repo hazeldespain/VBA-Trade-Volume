@@ -1,0 +1,51 @@
+Sub total_volume()
+
+'Set variable for holding the ticker name and set value
+    Dim ticker_name As String
+   
+'Set variable for holding the trading volume number
+    Dim trade_volume as Double
+    trade_volume = 0
+
+'-- ? CHECK ? -- Keep track of the location for each ticker in the table 
+        'From credit_card_challenge example line 10
+    Dim Ticker_Table_Row As Integer
+    
+
+'Loop through all worksheets 
+    For Each ws in Worksheets
+    
+        Dim WorksheetName As String
+
+        WorksheetName = ws.Name  
+        Ticker_Table_Row = 2
+
+'Determine last row/column functions (inside for loop)
+        LastRow = ws.Cells(Rows.Count, 1).End(xlUp).Row
+
+        For i = 2 To LastRow
+
+            trade_volume = trade_volume + ws.Cells(i, 7).Value
+            ' Distinguish between ticker names and start If
+            If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+
+                'Set ticker_name value in the If
+                ticker_name = ws.Cells(i, 1).Value
+
+                ' Print the Tic ker Label in the Summary Table
+                ws.Range("I" & Ticker_Table_Row).Value = ticker_name
+
+                ' Print the Volume Amount to the Summary Table
+                ws.Range("J" & Ticker_Table_Row).Value = trade_volume
+
+                ' Add one to the summary table row
+                Ticker_Table_Row = Ticker_Table_Row + 1
+    
+                ' Reset Volume
+                trade_volume = 0
+            End if
+    Next i
+
+
+Next ws
+End Sub
